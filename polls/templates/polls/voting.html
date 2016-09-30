@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Voting</title>
+</head>
+<body>
+        {% for poll in allPolls %}
+            <h1>{{ poll.question }}</h1>
+            {% for vars in poll.answers_set.all %}
+                <li>{{ vars }}</li>
+            {% endfor %}
+        {% endfor %}
+</body>
+</html>

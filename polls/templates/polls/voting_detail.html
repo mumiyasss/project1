@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+    <h1>{{ poll.question }}</h1>
+    <form action="/vote/" method="post">
+        {% csrf_git token %}
+        {% for answer in polls.answers_set.all %}
+            <li>{{ answer }}</li>
+        {% endfor %}
+    <form>
 </body>
 </html>
