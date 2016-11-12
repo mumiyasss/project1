@@ -8,14 +8,29 @@
 
     <!-- Bootstrap -->
     <link href="http://bootstrap-3.ru/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="foundation.css">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
   <body>
+        <h1>Hello, {{ username }}!</h1>
+        <!-- Форма для авторизации -->
+        <div class="top-bar">
+            <section class="top-bar-section">
+                <ul class="right">
+                    {% if username %}
+                        <li><a href="/auth/logout/">Выйти из аккаунта {{ username }}</a> </li>
+                    {% else %}
+                        <li><a href="/auth/login/">Войти</a> </li>
+                    {% endif %}
+                </ul>
+            </section>
+        </div>
+        <!-- Все записи в блогах -->
         {% for post in posts %}
-            <h1>{{ post.title }}</h1>
+            <h3>{{ post.title }}</h3>
             <h6>Категория: {{ post.category }}</h6>
             <td>Время публикации {{ post.published_date }}</td>
             <div>{{ post.text }}</div>

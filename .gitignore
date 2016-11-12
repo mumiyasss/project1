@@ -4,4 +4,6 @@ myvenv
 db.sqlite3
 .DS_Store
 blog/migrations
+loginsys/migrations
 .idea
+.todo

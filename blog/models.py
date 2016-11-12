@@ -29,3 +29,15 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+
+class Comments(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, null=False)
+    author = models.ForeignKey('auth.User')
+    text = models.TextField()
+    created_date = models.DateTimeField(
+        default=timezone.now)
+
+
+    def publish(self):
+        self.created_date = timezone.now()
+        self.save()
