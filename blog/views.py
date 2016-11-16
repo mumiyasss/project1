@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, Http404
 from .models import Post, Comments
 from django.contrib import auth
 # Create your views here.
@@ -13,8 +13,8 @@ def index_list(request):
 def post_in_detail(request, post_id):
     try:
         post = get_object_or_404(Post, pk=post_id)
-    except Post.DoesNotExist:
-        raise render(request, "blog/404_ERROR.html")
+    except Http404:
+        return render(request, "blog/404_ERROR.html")
     args = {}
     args['author'] = post.author
     args['category'] = post.category

@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ Title }}</title>
-</head>
-<body>
+{% extends 'main.html' %}
+
+{% block content %}
+        <h1>{{ title }} <small>{{ category }}</small></h1>
+        <em>Автор: {{ author }} | </em>  <small>{{ date }}</small>
+        <p class="lead">{{ text }}</p>
+        <hr>
+        <h2>Комментарии:</h2>
+
         {% for comment in comments %}
-            <h3>{{ comment.author }}</h3>
+            <h3><em>{{ comment.author }}</em></h3>
             <td>Время публикации {{ comment.created_date }}</td>
             <div>{{ comment.text }}</div>
         <hr>
         {% endfor %}
-</body>
-</html>
+{% endblock %}
