@@ -1,9 +1,11 @@
 {% extends 'main.html' %}
+{% load staticfiles %}
 
 {% block content %}
         <h1>{{ title }} <small>{{ category }}</small></h1>
         <em>Автор: {{ author }} | </em>  <small>{{ date }}</small>
         <p class="lead">{{ text }}</p>
+        <p><img src="{% static "like.png" %}" width="25px" height="25px">{{ likes }}</p>
         <hr>
         <h2>Комментарии:</h2>
 
@@ -13,4 +15,11 @@
             <div>{{ comment.text }}</div>
         <hr>
         {% endfor %}
+        {% if comment_form %}
+        <form action="/{{ post.id }}/addcomment/" method="post">
+            {% csrf_token %}
+            {{ comment_form }}
+            <input type="submit" class="btn btn-default" value="Добавить комментарий">
+        </form>
+        {% endif %}
 {% endblock %}

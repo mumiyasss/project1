@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 # Create your models here.
 
@@ -9,12 +10,23 @@ class Post(models.Model):
     # Содержание
     text = models.TextField()
 
+    def intro(self):
+        temp_text = str(self.text)
+        intro_text = temp_text[:140] # Только первые 140 символов
+        ### В конце должны быть пробел и многоточие...
+        if intro_text[len(intro_text)-1] == ' ':
+            return (intro_text + '...')
+        else:
+            return (intro_text + ' ' + '...')
+
     # Что-то о времени
     created_date = models.DateTimeField(
         default=timezone.now)
     published_date = models.DateTimeField(
         blank=True, null=True)
 
+    # Рейтинг
+    likes = models.IntegerField(default=0)
     def publish(self):
         self.published_date = timezone.now()
         self.save()
@@ -41,3 +53,10 @@ class Comments(models.Model):
     def publish(self):
         self.created_date = timezone.now()
         self.save()
+
+class Likers(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, null=False)
+    user = User()
+
+    def __str__(self):
+        return self.user.username

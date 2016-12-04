@@ -23,7 +23,7 @@
             <h3><a href="{%url 'blog:detail' post.id %}">{{ post.title }}</a></h3>
             <h6>Категория: {{ post.category }}</h6>
             <td>Время публикации {{ post.published_date }}</td>
-            <div>{{ post.text }}</div>
+            <div>{{ post.intro }}</div>
         <hr>
         {% endfor %}
 {% endblock %}

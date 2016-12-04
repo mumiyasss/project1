@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block login %}
+<form action="/auth/register/" method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+            </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">E-mail</label>
+            <div class="col-sm-10">
+                <input type="text" name="email" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+    </div>
+    <div class="form-group">
+        <label for="password1" class="col-sm-2 control-label">Пароль</label>
+            <div class="col-sm-10">
+                <input type="password" name="password1" class="form-control" id="password1" placeholder="Password">
+            </div>
+    </div>
+    <div class="form-group">
+        <label for="password2" class="col-sm-2 control-label">Повторите пароль</label>
+            <div class="col-sm-10">
+                <input type="password" name="password2" class="form-control" id="password2" placeholder="Password">
+            </div>
+    </div>
+        {% if register_error %}
+            <label class="error">{{ register_error }}</label>
+        {% endif %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input class="btn btn-default" type="submit" value="Зарегистрироваться">
+        </div>
+    </div>
+</form>
+{% endblock %}
