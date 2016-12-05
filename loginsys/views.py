@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import User
+from .logic import SiteUserPreferences
 # Create your views here.
 
 def login(request):
@@ -36,17 +37,18 @@ def register(request):
         username = request.POST.get('username', '')
         password1 = request.POST.get('password1', '')
         password2 = request.POST.get('password2', '')
-        if password1 and password2 and password1 != password2:
-            args['register_error'] = "Пароли не совпадают!"
+        # Проверка на ошибки
+        tools = SiteUserPreferences()
+        errors = tools.validation(username=username, email=email,
+                                     password1=password1, password2=password2)
+        if errors:
+            args['register_error'] = errors
             return render_to_response("loginsys/register.html", args)
-        #strU = str(username)
-        #strE = str(email)
-        #strP = str(password1)
+        # Сохранение пользователя
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
+        # Автроризируемся!
         user = auth.authenticate(username=username, password=password1)
-        #user = UserManager()
-        #user.create_user(username=email, email=email, password=password1)
         if user is not None:
             auth.login(request, user)
             return redirect('/')

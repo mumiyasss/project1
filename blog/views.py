@@ -3,14 +3,16 @@ from .models import Post, Comments
 from django.contrib import auth
 from .forms import CommentForm
 from django.core.context_processors import csrf
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 
-def index_list(request):
+def index_list(request, page_number=1):
     posts = Post.objects.all()
+    current_page = Paginator(posts, 2)
     args = {}
-    args['posts'] = posts
+    args['posts'] = current_page.page(page_number)
     args['username'] =  auth.get_user(request).username
     return render(request, 'blog/index.html', args)
 
