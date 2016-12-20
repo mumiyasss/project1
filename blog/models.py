@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from mysite.settings import MEDIA_ROOT
 # Create your models here.
 
 class Post(models.Model):
@@ -9,6 +10,7 @@ class Post(models.Model):
     title    = models.CharField(max_length=200)
     # Содержание
     text = models.TextField()
+    img = models.ImageField(upload_to='images/post/', null=True)
 
     def intro(self):
         temp_text = str(self.text)

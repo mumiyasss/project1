@@ -4,7 +4,7 @@ from django.contrib import auth
 from .forms import CommentForm
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
-
+from mysite.settings import MEDIA_ROOT
 # Create your views here.
 
 
@@ -28,6 +28,7 @@ def post_in_detail(request, post_id):
     args['author'] = post.author
     args['category'] = post.category
     args['title'] = post.title
+    args['img'] = post.img
     args['text'] = post.text
     args['date'] = post.published_date
     args['likes'] = post.likes

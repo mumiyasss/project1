@@ -2,9 +2,34 @@
 {% load staticfiles %}
 
 {% block content %}
+        <style>
+          /*GROW*/
+        .grow img {
+          height: 300px;
+          width: 300px;
+          border-radius: 7px; /* Уголки */
+
+          -webkit-transition: all 1s ease;
+             -moz-transition: all 1s ease;
+               -o-transition: all 1s ease;
+              -ms-transition: all 1s ease;
+                  transition: all 1s ease;
+        }
+
+        .grow img:hover {
+          width: 400px;
+          height: 400px;
+        }
+        </style>
+
         <h1>{{ title }} <small>{{ category }}</small></h1>
         <em>Автор: {{ author }} | </em>  <small>{{ date }}</small>
+
+        <div class="grow pic">
+            <img src="{{ img.url }}" >
+
         <p class="lead">{{ text }}</p>
+        </div>
         <p><img src="{% static "like.png" %}" width="25px" height="25px">{{ likes }}</p>
         <hr>
         <h2>Комментарии:</h2>
