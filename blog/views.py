@@ -60,6 +60,8 @@ def add_comment(request, post_id):
     return redirect('/'+post_id)
 
 def new_post(request):
+    if not auth.get_user(request).username:
+        return render(request, "blog/ERROR_PERMISSION.html")
     args = {}
     args['page_title'] = "Напишите что-нибудь"
     args['post_form'] = NewPostForm
