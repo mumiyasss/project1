@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, Http404, redirect, HttpResponse
 from .models import Post, Comments
 from django.contrib import auth
-from .forms import CommentForm
+from .forms import CommentForm, NewPostForm
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
 from mysite.settings import MEDIA_ROOT
@@ -21,7 +21,7 @@ def post_in_detail(request, post_id):
     try:
         post = get_object_or_404(Post, pk=post_id)
     except Http404:
-        return render(request, "blog/404_ERROR.html")
+        return render(request, "blog/ERROR_404.html")
     args = {}
     args.update(csrf(request))
     args['post'] = post
@@ -46,7 +46,7 @@ def post_like(request, post_id):
     try:
         post = get_object_or_404(Post, pk=post_id)
     except Http404:
-        return render(request, "blog/404_ERROR.html")
+        return render(request, "blog/ERROR_404.html")
 
 
 def add_comment(request, post_id):
@@ -59,3 +59,17 @@ def add_comment(request, post_id):
             form.save()
     return redirect('/'+post_id)
 
+def new_post(request):
+    args = {}
+    args['page_title'] = "Напишите что-нибудь"
+    args['post_form'] = NewPostForm
+    if request.POST and auth.get_user(request).username:
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            newpost = form.save(commit=False)
+            newpost.author = auth.get_user(request)
+            newpost.save()
+            args["success"] = "Ваша запись успешно опубликована! Спасибо!"
+        else:
+            args['form_creation_error'] = "Введенные в форму данные не корректны."
+    return render(request, "blog/new_post.html", args)

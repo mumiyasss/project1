@@ -7,4 +7,4 @@ blog/migrations
 loginsys/migrations
 .idea
 .todo
-media/*t
+media/*

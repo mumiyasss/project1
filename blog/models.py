@@ -10,7 +10,7 @@ class Post(models.Model):
     title    = models.CharField(max_length=200)
     # Содержание
     text = models.TextField()
-    img = models.ImageField(upload_to='images/post/', null=True)
+    img = models.ImageField(upload_to='images/post/', null=True, blank=True)
 
     def intro(self):
         temp_text = str(self.text)
@@ -25,7 +25,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     published_date = models.DateTimeField(
-        blank=True, null=True)
+        default=timezone.now, blank=True, null=True)
 
     # Рейтинг
     likes = models.IntegerField(default=0)
