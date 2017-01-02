@@ -20,6 +20,9 @@
     .grow img:hover {
     border-radius: 30px; /* Уголки */
     }
+    .comment_block {
+        margin-left: 50pt;
+    }
 </style>
 
 <h1>{{ title }} <small>{{ category }}</small></h1>
@@ -35,16 +38,30 @@
 
     <p class="lead">{{ text }}</p>
 
-    <p><img src="{% static "like.png" %}" width="25px" height="25px">{{ likes }}</p>
+    <a href="/{{ post.id }}/like/">
+        <img src="{% static "like.png" %}" width="25px" height="25px">
+    </a>
+        {% if likes %}
+            <p>
+            Уже лайкнули:
+            {% for like in likes %}
+            <i>{{ like }}</i>
+            {% endfor %}
+            </p>
+        {% endif %}
+
     <hr>
     <h2>Комментарии:</h2>
-
-    {% for comment in comments %}
-    <h3><em>{{ comment.author }}</em></h3>
-    <td>Время публикации {{ comment.created_date }}</td>
-    <div>{{ comment.text }}</div>
-    <hr>
-    {% endfor %}
+    <div class="comment_block">
+        {% for comment in comments %}
+        <h3><em>{{ comment.author }} </em><small>{{ comment.created_date }}</small></h3>
+        <div>{{ comment.text }}</div>
+        {% if user == comment.author %}
+        <a href="/{{ post.id }}/comments/{{ comment.id }}/delete/"><b>Удалить комментарий</b></a>
+        {% endif %}
+        <hr>
+        {% endfor %}
+    </div>
     {% if comment_form %}
     <form action="/{{ post.id }}/addcomment/" method="post">
     {% csrf_token %}

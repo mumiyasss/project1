@@ -30,6 +30,9 @@
         {% if register_error %}
             <label class="error">{{ register_error }}</label>
         {% endif %}
+        {% if login_error %}
+            <label class="error">{{ login_error }}</label>
+        {% endif %}
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <input class="btn btn-default" type="submit" value="Зарегистрироваться">
