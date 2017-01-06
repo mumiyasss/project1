@@ -1,0 +1,20 @@
+/*GROW*/
+    .grow img {
+    height: 400px; /* Ширина элемента в пикселах */
+    border-radius: 3px; /* Уголки */
+    align: center;
+
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+
+    }
+
+    .grow img:hover {
+    border-radius: 30px; /* Уголки */
+    }
+    .comment_block {
+        margin-left: 50pt;
+    }

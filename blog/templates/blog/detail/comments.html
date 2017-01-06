@@ -1,0 +1,19 @@
+<hr>
+<h2>Комментарии:</h2>
+<div class="comment_block">
+    {% for comment in comments %}
+    <h3><em>{{ comment.author }} </em><small>{{ comment.created_date }}</small></h3>
+    <div>{{ comment.text }}</div>
+    {% if user == comment.author %}
+    <a href="/{{ post.id }}/comments/{{ comment.id }}/delete/"><b>Удалить комментарий</b></a>
+    {% endif %}
+    <hr>
+    {% endfor %}
+</div>
+{% if comment_form %}
+<form action="/{{ post.id }}/addcomment/" method="post">
+{% csrf_token %}
+{{ comment_form }}
+<input type="submit" class="btn btn-default" value="Добавить комментарий">
+</form>
+{% endif %}

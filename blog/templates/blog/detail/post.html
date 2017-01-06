@@ -1,0 +1,12 @@
+<h1>{{ title }} <small>{{ category }}</small></h1>
+<em>Автор: {{ author }} | </em>  <small>{{ date }}</small>
+
+{% if img %}
+<div align="center">
+    <div class="grow pic">
+        <img src="{{ img.url }}" >
+    </div>
+</div>
+{% endif %}
+
+<p class="lead">{{ text }}</p>

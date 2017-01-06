@@ -1,15 +1,17 @@
 from django.shortcuts import render_to_response, redirect
 from django.contrib import auth
-from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_protect
+#from django.middleware import csrf
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import User
 from .logic import SiteUserPreferences
 from . import messages
 # Create your views here.
 
+@csrf_protect
 def login(request):
     args = {}
-    args.update(csrf(request))
+    #args.update(csrf(request))
     args['page_title'] = messages.loginPageTitle
     if request.POST:
         username = request.POST.get('username', '')
@@ -29,10 +31,10 @@ def logout(request):
     auth.logout(request)
     return redirect("/")
 
-
+@csrf_protect
 def register(request):
     args = {}
-    args.update(csrf(request))
+    #args.update(csrf(request))
     args['page_title'] = messages.registerPageTitle
     if request.POST:
         email = request.POST.get('email', '')

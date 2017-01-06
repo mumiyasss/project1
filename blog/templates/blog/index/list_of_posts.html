@@ -1,0 +1,7 @@
+<!-- Все записи в блогах -->
+{% for post in posts %}
+    <h3><a href="{%url 'blog:detail' post.id %}">{{ post.title }} </a><small>{{ post.published_date }}</small></h3>
+    <h6>Категория: {{ post.category }}</h6>
+    <div>{{ post.intro }}</div>
+<hr>
+{% endfor %}

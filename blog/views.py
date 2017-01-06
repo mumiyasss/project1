@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, Http404, redirect, HttpR
 from .models import Post, Comments, Likes
 from django.contrib import auth
 from .forms import CommentForm, NewPostForm
-from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_protect
 from django.core.paginator import Paginator
 from . import messages
 import os
@@ -14,17 +14,17 @@ def index_list(request, page_number=1):
     args = {}
     args['posts'] = current_page.page(page_number)
     args['username'] =  auth.get_user(request).username
-    return render(request, 'blog/index.html', args)
+    return render(request, 'blog/index/main.html', args)
 
-
+@csrf_protect
 def post_in_detail(request, post_id):
     try:
         post = get_object_or_404(Post, pk=post_id)
         likes = Likes.objects.filter(post=post)
     except Http404:
-        return render(request, "blog/ERROR_404.html")
+        return render(request, "ERROR_404.html")
     args = {}
-    args.update(csrf(request))
+    #args.update(csrf(request))
     args['user'] = auth.get_user(request)
     args['post'] = post
     args['author'] = post.author
@@ -40,7 +40,7 @@ def post_in_detail(request, post_id):
         args['comment_form'] = comment_form
     else:
         args['comment_form'] = None
-    return render(request, "blog/detail.html", args)
+    return render(request, "blog/detail/main.html", args)
 
 
 def post_like(request, post_id):
@@ -79,7 +79,7 @@ def add_comment(request, post_id):
 
 def new_post(request):
     if not auth.get_user(request).username:
-        return render(request, "blog/ERROR_PERMISSION.html")
+        return render(request, "ERROR_PERMISSION.html")
     args = {}
     args['page_title'] = messages.newPostPageTitle
     args['post_form'] = NewPostForm
@@ -92,4 +92,4 @@ def new_post(request):
             args["success"] = messages.newPostSuccess
         else:
             args['form_creation_error'] = messages.newPostFormCreationError
-    return render(request, "blog/new_post.html", args)
+    return render(request, "blog/new_post/main.html", args)
