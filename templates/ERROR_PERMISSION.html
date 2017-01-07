@@ -1,7 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1><strong><em>Ошибка доступа</em></strong></h1>
-<hr>
-<h2>Извините, но у вас нет прав на выполнение данных действий.</h2>
+<style>
+    .message {
+        margin-top: 70pt;
+    }
+</style>
+<div class="message">
+    <h1><strong><em>Ошибка доступа</em></strong></h1>
+    <hr>
+    <h2>Извините, но у вас нет прав на выполнение данных действий.</h2>
+</div>
 {% endblock %}

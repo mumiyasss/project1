@@ -1,7 +1,8 @@
 {% extends 'main.html' %}
+{% load staticfiles %}
 
 {% block content %}
-    <link rel="stylesheet" href="blog/detail/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="{% static "blog/css/detail.css" %}" type="text/css"/>
     {% include "blog/detail/post.html" %}
     {% include "blog/detail/like.html" %}
     {% include "blog/detail/comments.html" %}

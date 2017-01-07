@@ -1,17 +1,13 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render, redirect
 from django.contrib import auth
-from django.views.decorators.csrf import csrf_protect
-#from django.middleware import csrf
-from django.contrib.auth.models import UserManager
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .logic import SiteUserPreferences
 from . import messages
-# Create your views here.
 
-@csrf_protect
+@csrf_exempt
 def login(request):
     args = {}
-    #args.update(csrf(request))
     args['page_title'] = messages.loginPageTitle
     if request.POST:
         username = request.POST.get('username', '')
@@ -22,19 +18,19 @@ def login(request):
             return redirect('/')
         else:
             args['login_error'] = messages.loginError
-            return render_to_response("loginsys/login.html", args)
+            return render(request, "loginsys/login.html", args)
     else:
-        return render_to_response('loginsys/login.html', args)
+        return render(request, 'loginsys/login.html', args)
 
 
 def logout(request):
     auth.logout(request)
     return redirect("/")
 
-@csrf_protect
+
+@csrf_exempt
 def register(request):
     args = {}
-    #args.update(csrf(request))
     args['page_title'] = messages.registerPageTitle
     if request.POST:
         email = request.POST.get('email', '')
@@ -47,7 +43,7 @@ def register(request):
                                      password1=password1, password2=password2)
         if errors:
             args['register_error'] = errors
-            return render_to_response("loginsys/register.html", args)
+            return render(request, "loginsys/register.html", args)
         # Сохранение пользователя
         user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
@@ -58,6 +54,6 @@ def register(request):
             return redirect('/')
         else:
             args['login_error'] = messages.loginError
-            return render_to_response("loginsys/register.html", args)
+            return render(request, "loginsys/register.html", args)
     else:
-        return render_to_response('loginsys/register.html', args)
+        return render(request, 'loginsys/register.html', args)

@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, CharField, TextInput
+from django.forms import ModelForm, Textarea, CharField, TextInput, ImageField
 from .models import Comments, Post
 
 
@@ -21,3 +21,4 @@ class NewPostForm(ModelForm):
                      label="Название:")
     text = CharField(widget=Textarea(attrs={'class': "form-control"}),
                      label="Напишите сюда:")
+    img = ImageField(label="Выберите изображение для загрузки:")

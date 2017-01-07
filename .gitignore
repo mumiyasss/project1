@@ -8,4 +8,3 @@ loginsys/migrations
 .idea
 .todo
 media/*
-blog/telegram.py

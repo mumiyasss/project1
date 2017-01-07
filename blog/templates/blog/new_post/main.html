@@ -7,7 +7,7 @@ id_title
 </style>
 
     {% if post_form %}
-    <form action="/new_post/" method="post">
+    <form action="/new_post/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ post_form }}
     <input type="submit" class="btn btn-default" value="Опубликовать пост">
@@ -20,4 +20,5 @@ id_title
     {% if success %}
         {{ success }}
     {% endif %}
+    <video src="{% static "blog/vid.webm" %}" autoplay controls></video>
 {% endblock %}

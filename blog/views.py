@@ -5,6 +5,7 @@ from .forms import CommentForm, NewPostForm
 from django.views.decorators.csrf import csrf_protect
 from django.core.paginator import Paginator
 from . import messages
+from mysite.settings import BASE_DIR
 import os
 
 
@@ -13,7 +14,7 @@ def index_list(request, page_number=1):
     current_page = Paginator(posts, 2)
     args = {}
     args['posts'] = current_page.page(page_number)
-    args['username'] =  auth.get_user(request).username
+    args['user'] =  auth.get_user(request)
     return render(request, 'blog/index/main.html', args)
 
 @csrf_protect
@@ -86,6 +87,7 @@ def new_post(request):
     if request.POST and auth.get_user(request).username:
         form = NewPostForm(request.POST, request.FILES)
         if form.is_valid():
+            #handle_uploaded_file(request.FILES['img'])
             newpost = form.save(commit=False)
             newpost.author = auth.get_user(request)
             newpost.save()
@@ -93,3 +95,8 @@ def new_post(request):
         else:
             args['form_creation_error'] = messages.newPostFormCreationError
     return render(request, "blog/new_post/main.html", args)
+
+def handle_uploaded_file(f):
+    with open(BASE_DIR+'media/images/post/myimage.png', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
