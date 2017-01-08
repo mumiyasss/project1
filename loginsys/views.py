@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
@@ -27,6 +27,13 @@ def logout(request):
     auth.logout(request)
     return redirect("/")
 
+@csrf_exempt
+def login_existence(request):
+    if request.POST:
+        username = request.POST.get('username', '')
+        if User.objects.filter(username=username):
+            return HttpResponse("error", content_type="text/plain")
+        return HttpResponse("success", content_type="text/plain")
 
 @csrf_exempt
 def register(request):
