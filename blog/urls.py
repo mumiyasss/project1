@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^new_post/$', views.new_post, name='new_post'),
     url(r'^(?P<post_id>[0-9]+)/comments/(?P<comment_id>[0-9]+)/delete/$',
         views.delete_comment, name="delete_comment" ),
-
+    url(r'^search', views.search_posts, name="search" ),
 ]
 

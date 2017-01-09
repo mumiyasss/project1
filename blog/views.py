@@ -96,7 +96,13 @@ def new_post(request):
             args['form_creation_error'] = messages.newPostFormCreationError
     return render(request, "blog/new_post/main.html", args)
 
-def handle_uploaded_file(f):
-    with open(BASE_DIR+'media/images/post/myimage.png', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+
+def search_posts(request, page_number=1):
+    if request.GET:
+        search_phrase = request.GET.get('q', '')
+        posts = Post.objects.all().filter(title=search_phrase).order_by('-id')
+        current_page = Paginator(posts, 2)
+        args = {}
+        args['posts'] = current_page.page(page_number)
+        args['user'] = auth.get_user(request)
+        return render(request, 'blog/ajax_search_results/main.html', args)

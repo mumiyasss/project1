@@ -2,6 +2,9 @@
 
 {% block content %}
 
-    {% include "blog/index/list_of_posts.html" %}
-    {% include "blog/index/paginator.html" %}
+    {% include "blog/index/search.html" %}
+    <div class="content" id="content">
+        {% include "blog/index/list_of_posts.html" %}
+        {% include "blog/index/paginator.html" %}
+    </div>
 {% endblock %}
