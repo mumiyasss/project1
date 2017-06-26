@@ -5,6 +5,7 @@ db.sqlite3
 .DS_Store
 blog/migrations
 loginsys/migrations
+lowMes/migrations
 .idea
 .todo
 media/*

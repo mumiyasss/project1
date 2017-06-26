@@ -22,7 +22,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('blog.urls')),
+    url(r'^api/lowMes/', include('lowMes.api.urls')),
     url(r'^auth/', include('loginsys.urls')),
+    url(r'^lowmes/', include('lowMes.urls')),
+
 ]
 
 if settings.DEBUG:

@@ -1,7 +1,8 @@
 {% extends 'main.html' %}
+{% load staticfiles %}
 
 {% block content %}
-
+    <link href="{% static "blog/css/index.css" %}" rel="stylesheet" />
     {% include "blog/index/search.html" %}
     <div class="content" id="content">
         {% include "blog/index/list_of_posts.html" %}

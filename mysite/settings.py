@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'loginsys',
+    'lowMes.apps.LowmesConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [

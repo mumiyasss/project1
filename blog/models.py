@@ -13,7 +13,7 @@ class Post(models.Model):
     text = models.TextField()
     img = models.ImageField(upload_to='images/post/', null=True, blank=True)
 
-    def intro(self):
+    def intro(self): # Это можно оптимизировать записью в базу при методе safe 
         temp_text = str(self.text)
         intro_text = temp_text[:140] # Только первые 140 символов
         # В конце должны быть пробел и многоточие...
@@ -27,7 +27,6 @@ class Post(models.Model):
         default=timezone.now)
     published_date = models.DateTimeField(
         default=timezone.now, blank=True, null=True)
-
 
     def publish(self):
         self.published_date = timezone.now()
@@ -57,9 +56,11 @@ class Comments(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     objects = CommentsManager()
+
     def publish(self):
         self.created_date = timezone.now()
         self.save()
+
 
 class LikesManger(models.Model):
     def create_like(self, user):

@@ -14,8 +14,9 @@ def index_list(request, page_number=1):
     current_page = Paginator(posts, 2)
     args = {}
     args['posts'] = current_page.page(page_number)
-    args['user'] =  auth.get_user(request)
+    args['user'] = auth.get_user(request)
     return render(request, 'blog/index/main.html', args)
+
 
 @csrf_protect
 def post_in_detail(request, post_id):
@@ -25,7 +26,7 @@ def post_in_detail(request, post_id):
     except Http404:
         return render(request, "ERROR_404.html")
     args = {}
-    #args.update(csrf(request))
+    # args.update(csrf(request))
     args['user'] = auth.get_user(request)
     args['post'] = post
     args['author'] = post.author
@@ -51,7 +52,7 @@ def post_like(request, post_id):
         if Likes.objects.filter(post=this_post, user=auth.get_user(request)):
             like = Likes.objects.filter(post=this_post, user=auth.get_user(request))
             like.delete()
-        else: # Если лайка не было...
+        else:  # Если лайка не было...
             like = Likes(post=this_post, user=auth.get_user(request))
             like.save()
     return redirect('/'+post_id)
@@ -87,7 +88,7 @@ def new_post(request):
     if request.POST and auth.get_user(request).username:
         form = NewPostForm(request.POST, request.FILES)
         if form.is_valid():
-            #handle_uploaded_file(request.FILES['img'])
+            # handle_uploaded_file(request.FILES['img'])
             newpost = form.save(commit=False)
             newpost.author = auth.get_user(request)
             newpost.save()
@@ -100,7 +101,7 @@ def new_post(request):
 def search_posts(request, page_number=1):
     if request.GET:
         search_phrase = request.GET.get('q', '')
-        posts = Post.objects.all().filter(title=search_phrase).order_by('-id')
+        posts = Post.objects.all().filter(text__contains=search_phrase).order_by('-id')
         current_page = Paginator(posts, 2)
         args = {}
         args['posts'] = current_page.page(page_number)
