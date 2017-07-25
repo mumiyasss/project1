@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^api/lowMes/', include('lowMes.api.urls')),
     url(r'^auth/', include('loginsys.urls')),
     url(r'^lowmes/', include('lowMes.urls')),
+    url(r'^diary/', include('diary.urls')),
 
 ]
 

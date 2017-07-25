@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <h1>Все категории:</h1>
+    {%  for cat in categories  %}
+    <font color="{{ cat.ticket_colour}}">
+        <h2>@ {{ cat }}   {{ cat.ticket_colour}}</h2>
+    </font>
+    {%  endfor  %}
+{%  endblock  %}

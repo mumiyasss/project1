@@ -5,8 +5,6 @@ from .forms import CommentForm, NewPostForm
 from django.views.decorators.csrf import csrf_protect
 from django.core.paginator import Paginator
 from . import messages
-from mysite.settings import BASE_DIR
-import os
 
 
 def index_list(request, page_number=1):

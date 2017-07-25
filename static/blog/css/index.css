@@ -1,0 +1,12 @@
+.content {
+
+}
+
+.post_item:hover {
+    background-color: #F0F0F0;
+    border-radius: 3px; /* Уголки */
+}
+
+h1 {
+     text-decoration: underline;
+}

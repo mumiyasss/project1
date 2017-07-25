@@ -6,4 +6,4 @@ db.sqlite3
 .idea
 .todo
 media/*
-mysite/settings.py
+~/*
