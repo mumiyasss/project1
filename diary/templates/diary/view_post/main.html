@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<h1>{{ post.title}} <small>{{post.when_happen}}</small></h1>
+	<div>{{ post.text_rich|safe }}</div>
+	<small>Категория: <font color="{{post.category.ticket_color}}">{{ post.category }} </font></small>
+
+{%  endblock  %}

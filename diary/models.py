@@ -24,8 +24,8 @@ class DiaryPage(models.Model):
             return (intro_text + ' ' + '...')
 
     # Что-то о времени
-    when_happened = models.DateTimeField(
-        default=timezone.now)
+    # when_happened = models.DateTimeField(
+    #    default=timezone.now)
     published_date = models.DateTimeField(
         default=timezone.now, blank=True, null=True)
 
@@ -39,7 +39,7 @@ class DiaryPage(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    ticket_colour = models.CharField(max_length=15)
+    ticket_color = models.CharField(max_length=15)
     author = models.ForeignKey('auth.User')
 
     def __str__(self):

@@ -4,8 +4,10 @@
 {% block content %}
     <h1>Все категории:</h1>
     {%  for cat in categories  %}
-    <font color="{{ cat.ticket_colour}}">
-        <h2>@ {{ cat }}   {{ cat.ticket_colour}}</h2>
-    </font>
+    <a href="/diary/cat_id{{ cat.id }}">
+	    <font color="{{ cat.ticket_color}}">
+	        <h2>@ {{ cat }}   {{ cat.ticket_colour}}</h2>
+	    </font>
+    </a>
     {%  endfor  %}
 {%  endblock  %}
