@@ -9,9 +9,8 @@ from ckeditor.fields import RichTextField
 class DiaryPage(models.Model):
     author   = models.ForeignKey('auth.User')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, null=False, blank=False)
-    title    = models.CharField(max_length=200)
     # Содержание
-    text_rich = RichTextField(blank=True, default='')
+    text_rich = models.TextField() 
     #img = models.ImageField(upload_to='images/post/', null=True, blank=True)
 
     def intro(self): # Это можно оптимизировать записью в базу при методе safe

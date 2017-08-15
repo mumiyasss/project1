@@ -2,8 +2,12 @@
 {% load staticfiles %}
 
 {% block content %}
+    <script type="text/javascript" src="{% static "diary/js/aes.js" %}"></script>
+    <script type="text/javascript" src="{% static "diary/js/pbkdf2.js" %}"></script>
+
 	<h1>{{ post.title}} <small>{{post.when_happen}}</small></h1>
-	<div>{{ post.text_rich|safe }}</div>
+	<div class="lead" id="page">{{ post.text_rich|safe }}</div>
 	<small>Категория: <font color="{{post.category.ticket_color}}">{{ post.category }} </font></small>
+	<script type="text/javascript" src="{% static "diary/js/dec.js" %}"></script>
 
 {%  endblock  %}

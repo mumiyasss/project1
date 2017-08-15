@@ -15,7 +15,7 @@ class Post(models.Model):
     text_rich = RichTextField(blank=True, default='')
     img = models.ImageField(upload_to='images/post/', null=True, blank=True)
 
-    def intro(self): # Это можно оптимизировать записью в базу при методе safe 
+    def intro(self): # Это можно оптимизировать записью в базу при методе save 
         temp_text = str(self.text)
         intro_text = temp_text[:140] # Только первые 140 символов
         # В конце должны быть пробел и многоточие...

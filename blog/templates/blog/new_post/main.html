@@ -2,10 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-<style>
-id_title
-</style>
-
     {% if post_form %}
     <form action="/new_post/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -20,5 +16,4 @@ id_title
     {% if success %}
         {{ success }}
     {% endif %}
-    <video src="{% static "blog/vid.webm" %}" autoplay controls></video>
 {% endblock %}
