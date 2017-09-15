@@ -39,11 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'loginsys',
-    'diary',
-    'lowMes.apps.LowmesConfig',
     'rest_framework',
-    'ckeditor',
-    'ckeditor_uploader',
 ]
 
 MIDDLEWARE_CLASSES = [

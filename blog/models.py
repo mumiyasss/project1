@@ -12,7 +12,6 @@ class Post(models.Model):
     title    = models.CharField(max_length=200)
     # Содержание
     text = models.TextField()
-    text_rich = RichTextField(blank=True, default='')
     img = models.ImageField(upload_to='images/post/', null=True, blank=True)
 
     def intro(self): # Это можно оптимизировать записью в базу при методе save 

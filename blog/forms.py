@@ -15,10 +15,10 @@ class CommentForm(ModelForm):
 class NewPostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'category', 'img', 'text']
+        fields = ['title', 'category', 'text']
 
     title = CharField(widget=TextInput(attrs={'class': "form-control"}),
                      label="Название:")
     text = CharField(widget=Textarea(attrs={'class': "form-control"}),
                      label="Напишите сюда:")
-    img = ImageField(label="Выберите изображение для загрузки:")
+    #img = ImageField(label="Выберите изображение для загрузки:")
